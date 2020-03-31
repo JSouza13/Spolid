@@ -88,11 +88,16 @@ export const Content = styled.div`
       border: 1px solid #dcdce6;
       border-radius: 8px;
       padding: 0 15px;
-      margin: 0 0 10px;
+      margin: 10px 0 10px;
 
       &::placeholder {
         font-size: 14px;
       }
+    }
+
+    span {
+      color: #cd0000;
+      align-self: flex-start;
     }
 
     button {
