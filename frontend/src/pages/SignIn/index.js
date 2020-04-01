@@ -1,8 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+
+import { signInRequest } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo.svg';
 import heroesImg from '~/assets/heroes.png';
@@ -15,9 +18,13 @@ const schema = Yup.object().shape({
 });
 
 export default function SignIn() {
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
+
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
   }
+
   return (
     <>
       <section>
@@ -29,7 +36,7 @@ export default function SignIn() {
           <Input name="email" type="email" placeholder="Seu e-mail" />
           <Input name="password" type="password" placeholder="Sua senha" />
 
-          <button type="submit">Acessar</button>
+          <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
           <Link to="/register">
             <FiLogIn size={16} color="#E02041" />
             Criar conta gratuita

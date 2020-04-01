@@ -17,13 +17,14 @@ class SeesionController {
       return res.status(401).json({ error: 'Senha incompatível' });
     }
 
-    const { id, name } = user;
+    const { id, name, provider } = user;
 
     return res.json({
       user: {
         id,
         name,
         email,
+        provider,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
