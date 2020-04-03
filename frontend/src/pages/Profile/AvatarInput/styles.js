@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 
   label {
     cursor: pointer;

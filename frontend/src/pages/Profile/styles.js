@@ -3,7 +3,7 @@ import { lighten } from 'polished';
 
 export const Container = styled.div`
   max-width: 540px;
-  margin: 50px auto;
+  margin: 25px auto;
 
   form {
     width: 100%;
