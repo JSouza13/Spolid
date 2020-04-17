@@ -1,14 +1,14 @@
 import React from 'react';
+import { FiLogIn } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
+
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
-import { signInRequest } from '~/store/modules/auth/actions';
-
-import logo from '~/assets/logo.svg';
 import heroesImg from '~/assets/heroes.png';
+import logo from '~/assets/logo.svg';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()

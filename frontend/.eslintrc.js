@@ -4,13 +4,17 @@ module.exports = {
     jest: true,
     browser: true
   },
-  extends: ["airbnb", "prettier", "prettier/react"],
+  extends: [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
     __DEV__: true
   },
-  parser: 'babel-eslint',
+  parser: "babel-eslint",
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -18,7 +22,14 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
-  plugins: ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
+  plugins: [
+    "react",
+    "jsx-a11y",
+    "import",
+    "react-hooks",
+    "prettier",
+    "eslint-plugin-import-helpers"
+  ],
   rules: {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
@@ -34,6 +45,20 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-props-no-spreading": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+          newlinesBetween: "always", // new line between groups
+          groups: [
+              "/^react/",
+              "module",
+              "/^~/",
+              "/^@shared/",
+              ["parent", "sibling", "index"],
+          ],
+          alphabetize: { order: "asc", ignoreCase: true },
+      },
+  ],
   },
   settings: {
     "import/resolver": {

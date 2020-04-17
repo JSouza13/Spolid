@@ -1,12 +1,12 @@
 import React from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { Form, Input } from '@rocketseat/unform';
-import { FiArrowLeft } from 'react-icons/fi';
 import * as Yup from 'yup';
 
 import logo from '~/assets/logo.svg';
-
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
