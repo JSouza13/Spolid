@@ -1,5 +1,6 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -17,19 +18,19 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    // if (!user.provider) {
-    //   toast.error('Usuário não é prestador');
-    //   return;
-    // }
-
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
-    toast.success(`Olá ${response.data.user.name}, bem-vindo a SPOLID!`);
     yield put(signInSuccess(token, user));
 
     history.push('/dashboard');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados');
+    Swal.fire({
+      title: `Ocorreu um erro na autenticação.`,
+      text: 'Verifique os seus dados e tente novamente.',
+      icon: 'error',
+      confirmButtonColor: '#E02041',
+      confirmButtonText: 'Ok!',
+    });
 
     yield put(signFailure());
   }
@@ -46,12 +47,28 @@ export function* signUp({ payload }) {
       provider: false,
     });
 
-    toast.success('Cadastro efetuado!');
-    history.push('/');
+    Swal.fire({
+      title: `Cadastro efetuado com sucesso!`,
+      icon: 'success',
+      confirmButtonColor: '#E02041',
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        history.push('/');
+      }
+    });
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados');
-
-    yield put(signFailure());
+    Swal.fire({
+      title: `Ocorreu um erro no cadastro.`,
+      text: 'Verifique os dados e tente novamente.',
+      icon: 'error',
+      confirmButtonColor: '#E02041',
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        put(signFailure());
+      }
+    });
   }
 }
 

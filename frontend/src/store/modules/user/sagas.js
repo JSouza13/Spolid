@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -19,15 +19,30 @@ export function* updateProfile({ payload }) {
 
     const response = yield call(api.put, 'users', profile);
 
-    toast.success('Perfil atualizado com sucesso!');
-
-    history.push('/dashboard');
-
     yield put(updateProfileSuccess(response.data));
-  } catch (err) {
-    toast.error('Erro ao atualizar perfil, confira seus dados!');
 
-    yield put(updateProfileFailure());
+    Swal.fire({
+      title: `Perfil atualizado com sucesso!`,
+      icon: 'success',
+      confirmButtonColor: '#E02041',
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        history.push('/dashboard');
+      }
+    });
+  } catch (err) {
+    Swal.fire({
+      title: `Ocorreu um erro no cadastro.`,
+      text: 'Verifique os dados e tente novamente.',
+      icon: 'error',
+      confirmButtonColor: '#E02041',
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        put(updateProfileFailure());
+      }
+    });
   }
 }
 
