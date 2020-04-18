@@ -4,17 +4,19 @@ import styled from 'styled-components';
 import themes from '~/styles/themes/light';
 
 export const Container = styled.div`
-  max-width: 960px;
+  max-width: fit-content;
   margin: 25px auto;
-
   padding: 25px;
   background: #f0f0f5;
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 650px) {
+    margin: 25px;
+  }
 
   form {
     max-width: 540px;

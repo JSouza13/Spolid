@@ -29,7 +29,7 @@ export default function SignUp() {
   return (
     <div className="content">
       <section>
-        <img src={logo} alt="SPOLID" />
+        <img src={logo} alt="SPOLID" width="350" height="100" />
         <h1>Cadastro</h1>
         <p>Faça seu cadastro, entre na plataforma e conquiste o sucesso!</p>
 

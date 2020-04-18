@@ -35,7 +35,7 @@ export default function Header() {
       <Content>
         <nav>
           <Link to="/dashboard">
-            <img src={logo} alt="SPOLID" />
+            <img src={logo} alt="SPOLID" width="166" height="49" />
           </Link>
         </nav>
 
@@ -54,6 +54,8 @@ export default function Header() {
                   'https://api.adorable.io/avatars/50/abott@adorable.png'
                 }
                 alt={profile.name}
+                width="50"
+                height="50"
               />
             </Badge>
 

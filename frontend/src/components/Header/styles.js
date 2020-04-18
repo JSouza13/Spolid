@@ -4,8 +4,12 @@ import themes from '~/styles/themes/light';
 
 export const Container = styled.div`
   background: #fff;
-  padding: 0 30px;
+  padding: 0 25px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  @media (max-width: 650px) {
+    padding: 0 15px;
+  }
 `;
 
 export const Badge = styled.button`
@@ -44,8 +48,8 @@ export const OptionProfile = styled.div`
 export const OptionProfileList = styled.div`
   position: absolute;
   width: 100px;
-  left: calc(100% - 108px);
-  top: calc(12%);
+  left: calc(100% - 105px);
+  top: calc(5% + 35px);
   background: rgba(0, 0, 0, 0.8);
   border-radius: 4px;
   padding: 15px 5px;
@@ -55,18 +59,23 @@ export const OptionProfileList = styled.div`
   &::before {
     content: '';
     position: absolute;
-    left: calc(50% - 20px);
+    left: calc(50% - 14px);
     top: -20px;
     width: 0;
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     border-bottom: 20px solid rgba(0, 0, 0, 0.8);
+
+    @media (max-width: 650px) {
+      left: calc(50% - 8px);
+    }
   }
 `;
 
 export const Content = styled.div`
   height: 64px;
+  max-width: 100vw;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -77,9 +86,10 @@ export const Content = styled.div`
     align-items: center;
 
     img {
-      margin-right: 20px;
-      padding-right: 20px;
       border-right: 1px solid #eee;
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     a {
@@ -102,8 +112,11 @@ export const Content = styled.div`
 export const Profile = styled.div`
   display: flex;
   margin-left: 20px;
-  padding-left: 20px;
   border-left: 1px solid #eee;
+
+  @media (max-width: 650px) {
+    margin-left: 10px;
+  }
 
   div {
     text-align: right;
@@ -116,8 +129,7 @@ export const Profile = styled.div`
   }
 
   img {
-    width: 50px;
-    height: 50px;
+    display: block;
     border-radius: 50%;
   }
 `;

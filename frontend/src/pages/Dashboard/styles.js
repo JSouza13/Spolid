@@ -5,7 +5,8 @@ import themes from '~/styles/themes/light';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 0 30px;
+  height: 100vh;
+  padding: 0 40px;
   margin: 32px auto;
 
   h2 {
@@ -26,7 +27,7 @@ export const Container = styled.div`
 
   ul {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 24px;
     list-style: none;
 
@@ -38,7 +39,10 @@ export const Container = styled.div`
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
 
       &:hover {
-        background: ${lighten(0.6, `${themes.text}`)};
+        background: ${lighten(0.65, `${themes.text}`)};
+        -ms-transform: scale(0.3);
+        transform: scale(1.1);
+        z-index: 1;
       }
 
       img {

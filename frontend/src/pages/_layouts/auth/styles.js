@@ -4,21 +4,41 @@ import styled from 'styled-components';
 import themes from '~/styles/themes/light';
 
 export const Wrapper = styled.div`
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 100vh;
+  height: 100vh;
+
+  @media (max-width: 650px) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 1024px) {
+    overflow: hidden;
+  }
 `;
 
 export const Content = styled.div`
-  width: 100%;
   max-width: 1120px;
-  height: 100vh;
-  margin: 0 auto;
+  margin: 15px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 650px) {
+    margin: 25px;
+    padding: 20px;
+    flex-direction: column-reverse;
+    justify-items: flex-end;
+  }
+
+  @media (max-width: 1024px) {
+    max-height: 90vh;
+    flex-direction: column-reverse;
+    justify-items: flex-end;
+  }
 
   .content {
     width: 100%;
@@ -30,6 +50,14 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 650px) {
+      padding: 30px;
+      max-width: 100vw;
+      margin: 15px;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   section {
@@ -37,19 +65,43 @@ export const Content = styled.div`
     max-width: 350px;
     margin-right: 30px;
 
+    @media (max-width: 650px) {
+      min-width: 70%;
+      margin: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     img {
-      max-width: 350px;
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     h1 {
       margin: 64px 0 32px;
       font-size: 32px;
+
+      @media (max-width: 650px) {
+        margin: 15px 0 10px;
+        font-size: 28px;
+      }
+
+      @media (max-width: 1024px) {
+        margin: 15px 0 10px;
+        font-size: 28px;
+      }
     }
 
     p {
       font-size: 18px;
       color: #737380;
       line-height: 32px;
+
+      @media (max-width: 650px) {
+        font-size: 14px;
+      }
     }
 
     a {
@@ -69,7 +121,17 @@ export const Content = styled.div`
       svg {
         margin-right: 8px;
       }
+
+      @media (max-width: 650px) {
+        margin-top: 15px;
+      }
     }
+  }
+
+  section + img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   form {
@@ -78,9 +140,27 @@ export const Content = styled.div`
     margin-right: 30px;
     margin-top: 100px;
 
+    @media (max-width: 650px) {
+      margin-top: 0px;
+      margin-right: 0px;
+    }
+
+    @media (max-width: 1024px) {
+      margin-top: 0px;
+      margin-right: 0px;
+    }
+
     h1 {
       font-size: 32px;
       margin-bottom: 32px;
+
+      @media (max-width: 650px) {
+        margin: 10px;
+      }
+
+      @media (max-width: 568px) {
+        font-size: 25px;
+      }
     }
 
     input {
@@ -94,6 +174,11 @@ export const Content = styled.div`
 
       &::placeholder {
         font-size: 14px;
+      }
+
+      @media (max-width: 650px) {
+        padding: 0 10px;
+        margin: 3px;
       }
     }
 
@@ -121,6 +206,11 @@ export const Content = styled.div`
 
       &:hover {
         background: ${darken(0.03, `${themes.color.primary}`)};
+      }
+
+      @media (max-width: 650px) {
+        height: 40px;
+        line-height: 40px;
       }
     }
   }

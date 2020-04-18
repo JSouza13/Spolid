@@ -29,7 +29,7 @@ export default function SignIn() {
   return (
     <>
       <section>
-        <img src={logo} alt="SPOLID" />
+        <img src={logo} alt="SPOLID" width="350" height="100" />
 
         <Form schema={schema} onSubmit={handleSubmit}>
           <h1>Faça seu login</h1>
@@ -45,7 +45,7 @@ export default function SignIn() {
         </Form>
       </section>
 
-      <img src={heroesImg} alt="Heroes" />
+      <img src={heroesImg} alt="Heroes" width="596" height="574" />
     </>
   );
 }
