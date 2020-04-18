@@ -35,7 +35,7 @@ export function* updateProfile({ payload }) {
   } catch (err) {
     Swal.fire({
       title: `Ocorreu um erro no cadastro.`,
-      text: 'Verifique os dados e tente novamente.',
+      text: err.response.data.error,
       icon: 'error',
       confirmButtonColor: themes.color.primary,
       confirmButtonText: 'Ok!',
