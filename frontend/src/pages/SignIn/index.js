@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import heroesImg from '~/assets/heroes.png';
 import logo from '~/assets/logo.svg';
 import { signInRequest } from '~/store/modules/auth/actions';
+import themes from '~/styles/themes/light';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -38,7 +39,7 @@ export default function SignIn() {
 
           <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
           <Link to="/register">
-            <FiLogIn size={16} color="#E02041" />
+            <FiLogIn size={16} color={themes.color.primary} />
             Criar conta gratuita
           </Link>
         </Form>

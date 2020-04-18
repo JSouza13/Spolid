@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 
 import logo from '~/assets/logo.svg';
 import { signUpRequest } from '~/store/modules/auth/actions';
+import themes from '~/styles/themes/light';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome é obrigatório'),
@@ -33,7 +34,7 @@ export default function SignUp() {
         <p>Faça seu cadastro, entre na plataforma e conquiste o sucesso!</p>
 
         <Link to="/">
-          <FiArrowLeft size={16} color="#E02041" />
+          <FiArrowLeft size={16} color={themes.color.primary} />
           Já tenho cadastro
         </Link>
       </section>

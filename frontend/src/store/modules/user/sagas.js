@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 
 import api from '~/services/api';
 import history from '~/services/history';
+import themes from '~/styles/themes/light';
 
 import { updateProfileSuccess, updateProfileFailure } from './actions';
 
@@ -24,7 +25,7 @@ export function* updateProfile({ payload }) {
     Swal.fire({
       title: `Perfil atualizado com sucesso!`,
       icon: 'success',
-      confirmButtonColor: '#E02041',
+      confirmButtonColor: themes.color.primary,
       confirmButtonText: 'Ok!',
     }).then(async (result) => {
       if (result.value) {
@@ -36,7 +37,7 @@ export function* updateProfile({ payload }) {
       title: `Ocorreu um erro no cadastro.`,
       text: 'Verifique os dados e tente novamente.',
       icon: 'error',
-      confirmButtonColor: '#E02041',
+      confirmButtonColor: themes.color.primary,
       confirmButtonText: 'Ok!',
     }).then(async (result) => {
       if (result.value) {

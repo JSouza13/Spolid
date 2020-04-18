@@ -1,11 +1,12 @@
 import { lighten } from 'polished';
 import styled from 'styled-components';
 
+import themes from '~/styles/themes/light';
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
 
   label {
     cursor: pointer;
@@ -19,7 +20,7 @@ export const Container = styled.div`
       width: 120px;
       border-radius: 50%;
       border: 3px solid ${lighten(0.4, '#333')};
-      background: ${lighten(0.7, '#e02041')};
+      background: ${lighten(0.7, `${themes.color.primary}`)};
     }
 
     input {

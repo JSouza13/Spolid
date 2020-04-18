@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 import api from '~/services/api';
 import history from '~/services/history';
+import themes from '~/styles/themes/light';
 
 import { signInSuccess, signFailure } from './actions';
 
@@ -28,7 +29,7 @@ export function* signIn({ payload }) {
       title: `Ocorreu um erro na autenticação.`,
       text: 'Verifique os seus dados e tente novamente.',
       icon: 'error',
-      confirmButtonColor: '#E02041',
+      confirmButtonColor: themes.color.primary,
       confirmButtonText: 'Ok!',
     });
 
@@ -50,7 +51,7 @@ export function* signUp({ payload }) {
     Swal.fire({
       title: `Cadastro efetuado com sucesso!`,
       icon: 'success',
-      confirmButtonColor: '#E02041',
+      confirmButtonColor: themes.color.primary,
       confirmButtonText: 'Ok!',
     }).then(async (result) => {
       if (result.value) {
@@ -62,7 +63,7 @@ export function* signUp({ payload }) {
       title: `Ocorreu um erro no cadastro.`,
       text: 'Verifique os dados e tente novamente.',
       icon: 'error',
-      confirmButtonColor: '#E02041',
+      confirmButtonColor: themes.color.primary,
       confirmButtonText: 'Ok!',
     }).then(async (result) => {
       if (result.value) {

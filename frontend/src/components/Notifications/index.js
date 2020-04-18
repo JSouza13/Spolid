@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { MdNotifications } from 'react-icons/md';
 
+import themes from '~/styles/themes/light';
+
 import {
   Container,
   Badge,
@@ -19,7 +21,7 @@ export default function Notifications() {
   return (
     <Container>
       <Badge onClick={handleToggleVisible} hasUnread>
-        <MdNotifications color="#e02041" size={20} />
+        <MdNotifications color={themes.color.primary} size={20} />
       </Badge>
 
       <NotificationList visible={visible}>

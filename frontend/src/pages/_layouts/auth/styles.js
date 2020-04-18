@@ -1,6 +1,8 @@
 import { darken } from 'polished';
 import styled from 'styled-components';
 
+import themes from '~/styles/themes/light';
+
 export const Wrapper = styled.div`
   height: 100%;
   display: flex;
@@ -104,7 +106,7 @@ export const Content = styled.div`
       margin-top: 16px;
       height: 60px;
       width: 100%;
-      background: #e02041;
+      background: ${themes.color.primary};
       border: 0;
       border-radius: 8px;
       color: #fff;
@@ -118,7 +120,7 @@ export const Content = styled.div`
       transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.03, '#e02041')};
+        background: ${darken(0.03, `${themes.color.primary}`)};
       }
     }
   }

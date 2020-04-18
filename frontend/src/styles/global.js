@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import { createGlobalStyle } from 'styled-components';
 
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -23,7 +24,9 @@ export default createGlobalStyle`
 
   body {
     font: 400 14px Roboto, sans-serif;
-    background: #f0f0f5;
+    background: ${darken(0.1, '#f0f0f1')};
+
+    color: #333;
     -webkit-font-smoothing: antialiased !important;
   }
 

@@ -1,11 +1,23 @@
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 import styled from 'styled-components';
 
+import themes from '~/styles/themes/light';
+
 export const Container = styled.div`
-  max-width: 540px;
+  max-width: 960px;
   margin: 25px auto;
 
+  padding: 25px;
+  background: #f0f0f5;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   form {
+    max-width: 540px;
     width: 100%;
 
     h1 {
@@ -45,7 +57,7 @@ export const Container = styled.div`
       margin: 5px 0 0;
       height: 44px;
       width: 100%;
-      background: #e02041;
+      background: ${themes.color.primary};
       color: #fff;
       border: 0;
       border-radius: 8px;
@@ -54,24 +66,24 @@ export const Container = styled.div`
       transition: background 0.2s;
 
       &:hover {
-        background: ${lighten(0.04, '#e02041')};
+        background: ${darken(0.04, `${themes.color.primary}`)};
       }
     }
-  }
-  > button {
-    margin: 5px 0 0;
-    height: 44px;
-    width: 100%;
-    background: #3b9eff;
-    color: #fff;
-    border: 0;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 16px;
-    transition: background 0.2s;
+    button + button {
+      margin: 5px 0 0;
+      height: 44px;
+      width: 100%;
+      background: ${themes.color.secudary};
+      color: ${themes.color.primary};
+      border: 0;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      transition: background 0.2s;
 
-    &:hover {
-      background: ${lighten(0.04, '#3b9eff')};
+      &:hover {
+        background: ${darken(0.1, `${themes.color.secudary}`)};
+      }
     }
   }
 `;
