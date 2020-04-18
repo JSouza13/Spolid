@@ -35,7 +35,6 @@ export const Content = styled.div`
   }
 
   @media (max-width: 1024px) {
-    max-height: 90vh;
     flex-direction: column-reverse;
     justify-items: flex-end;
   }
@@ -71,6 +70,10 @@ export const Content = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+
+    @media (max-width: 1024px) {
+      max-width: 550px;
     }
 
     img {
@@ -132,6 +135,10 @@ export const Content = styled.div`
     width: 100%;
     height: auto;
     display: block;
+
+    @media (max-width: 768px) {
+      max-width: 50vw;
+    }
   }
 
   form {
@@ -148,6 +155,7 @@ export const Content = styled.div`
     @media (max-width: 1024px) {
       margin-top: 0px;
       margin-right: 0px;
+      max-width: 550px;
     }
 
     h1 {
@@ -178,7 +186,7 @@ export const Content = styled.div`
 
       @media (max-width: 650px) {
         padding: 0 10px;
-        margin: 3px;
+        margin-top: 3px;
       }
     }
 
