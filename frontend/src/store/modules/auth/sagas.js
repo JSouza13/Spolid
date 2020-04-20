@@ -72,6 +72,39 @@ export function* signUp({ payload }) {
   }
 }
 
+export function* Forgot({ payload }) {
+  try {
+    const { email } = payload;
+
+    yield call(api.post, 'forgot_password', {
+      email,
+    });
+
+    Swal.fire({
+      title: `E-mail de recuperação enviado!`,
+      icon: 'success',
+      confirmButtonColor: themes.color.primary,
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        // history.push('/');
+      }
+    });
+  } catch (err) {
+    Swal.fire({
+      title: `Ocorreu um erro no envio.`,
+      text: err.response.data.error,
+      icon: 'error',
+      confirmButtonColor: themes.color.primary,
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        put(signFailure());
+      }
+    });
+  }
+}
+
 export function setToken({ payload }) {
   if (!payload) return;
 
@@ -91,4 +124,5 @@ export default all([
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_OUT', signOut),
+  takeLatest('@auth/FORGOT_REQUEST', Forgot),
 ]);

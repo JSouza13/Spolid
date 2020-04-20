@@ -19,6 +19,13 @@ export function signUpRequest(name, email, password) {
   };
 }
 
+export function forgotRequest(email) {
+  return {
+    type: '@auth/FORGOT_REQUEST',
+    payload: { email },
+  };
+}
+
 export function signFailure() {
   return {
     type: '@auth/SIGN_FAILURE',
