@@ -1,5 +1,9 @@
+import crypto from 'crypto';
+import { addHours } from 'date-fns';
 import * as Yup from 'yup';
 
+import Mail from '../../lib/Mail';
+// import mailer from '../../config/mail';
 import File from '../models/File';
 import User from '../models/User';
 
@@ -98,6 +102,84 @@ class UserController {
       email: NewEmail,
       avatar,
     });
+  }
+
+  async forgot_password(req, res) {
+    const schema = Yup.object().shape({
+      email: Yup.string().email().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Falha na validação' });
+    }
+
+    const { email } = req.body;
+
+    const user = await User.findOne({
+      where: { email },
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: 'E-mail não cadastrado' });
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+    const now = addHours(new Date(), 1);
+
+    await User.update(
+      {
+        password_reset_token: token,
+        password_reset_expires: now,
+      },
+      {
+        where: { email },
+      }
+    );
+
+    await Mail.sendMail({
+      to: `${user.name} <${email}>`,
+      subject: 'Esqueci minha senha',
+      template: 'forgotPassword',
+      context: {
+        user: user.name,
+        token,
+      },
+    });
+
+    return res.status(200).send(`E-mail enviado para ${user.name} <${email}>`);
+  }
+
+  async reset_password(req, res) {
+    const schema = Yup.object().shape({
+      token: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().required().min(6),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Falha na validação' });
+    }
+    const { email, token, password } = req.body;
+
+    const user = await User.findOne({
+      where: { email },
+    });
+
+    if (!user) return res.status(400).json({ error: 'E-mail não cadastrado' });
+
+    if (token !== user.password_reset_token)
+      return res.status(400).send({ error: 'Token inválido' });
+
+    const now = new Date();
+
+    if (now > user.password_reset_expires)
+      return res.status(400).send({ error: 'Token expirado, gere um novo' });
+
+    user.password = password;
+
+    await user.update(req.body);
+
+    return res.status(200).json({ email });
   }
 }
 
