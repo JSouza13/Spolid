@@ -2,8 +2,8 @@ import crypto from 'crypto';
 import { addHours } from 'date-fns';
 import * as Yup from 'yup';
 
-import Mail from '../../lib/Mail';
-// import mailer from '../../config/mail';
+import Queue from '../../lib/Queue';
+import ForgotPasswordMail from '../jobs/ForgotPasswordMail';
 import File from '../models/File';
 import User from '../models/User';
 
@@ -136,15 +136,7 @@ class UserController {
       }
     );
 
-    await Mail.sendMail({
-      to: `${user.name} <${email}>`,
-      subject: 'Esqueci minha senha',
-      template: 'forgotPassword',
-      context: {
-        user: user.name,
-        token,
-      },
-    });
+    await Queue.add(ForgotPasswordMail.key, { user, email, token });
 
     return res.status(200).send(`E-mail enviado para ${user.name} <${email}>`);
   }
@@ -154,12 +146,19 @@ class UserController {
       token: Yup.string().required(),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(6),
+      confirmPassword: Yup.string().when('password', (password, field) =>
+        password ? field.required() : field
+      ),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Falha na validação' });
     }
-    const { email, token, password } = req.body;
+    const { email, token, password, confirmPassword } = req.body;
+
+    if (confirmPassword !== password) {
+      return res.status(400).json({ error: 'As senhas devem ser iguais' });
+    }
 
     const user = await User.findOne({
       where: { email },
