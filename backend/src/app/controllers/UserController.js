@@ -124,7 +124,7 @@ class UserController {
     }
 
     const token = crypto.randomBytes(20).toString('hex');
-    const now = addHours(new Date(), 1);
+    const now = addHours(new Date(), 48);
 
     await User.update(
       {

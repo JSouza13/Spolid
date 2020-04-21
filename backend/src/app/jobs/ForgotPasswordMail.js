@@ -15,6 +15,7 @@ class ForgotPasswordMail {
       context: {
         user: user.name,
         token,
+        email,
       },
     });
   }
