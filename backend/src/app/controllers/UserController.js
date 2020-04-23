@@ -123,12 +123,12 @@ class UserController {
       return res.status(400).json({ error: 'E-mail não cadastrado' });
     }
 
-    const token = crypto.randomBytes(20).toString('hex');
+    const tokenTemp = crypto.randomBytes(20).toString('hex');
     const now = addHours(new Date(), 48);
 
     await User.update(
       {
-        password_reset_token: token,
+        password_reset_token: tokenTemp,
         password_reset_expires: now,
       },
       {
@@ -136,15 +136,13 @@ class UserController {
       }
     );
 
-    await Queue.add(ForgotPasswordMail.key, { user, email, token });
+    await Queue.add(ForgotPasswordMail.key, { user, email, tokenTemp });
 
     return res.status(200).send(`E-mail enviado para ${user.name} <${email}>`);
   }
 
   async reset_password(req, res) {
     const schema = Yup.object().shape({
-      token: Yup.string().required(),
-      email: Yup.string().email().required(),
       password: Yup.string().required().min(6),
       confirmPassword: Yup.string().when('password', (password, field) =>
         password ? field.required() : field
@@ -154,19 +152,17 @@ class UserController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Falha na validação' });
     }
-    const { email, token, password, confirmPassword } = req.body;
+    const { tokenTemp, password, confirmPassword } = req.body;
 
     if (confirmPassword !== password) {
       return res.status(400).json({ error: 'As senhas devem ser iguais' });
     }
 
     const user = await User.findOne({
-      where: { email },
+      where: { password_reset_token: tokenTemp },
     });
 
-    if (!user) return res.status(400).json({ error: 'E-mail não cadastrado' });
-
-    if (token !== user.password_reset_token)
+    if (tokenTemp !== user.password_reset_token)
       return res.status(400).send({ error: 'Token inválido' });
 
     const now = new Date();
@@ -178,7 +174,7 @@ class UserController {
 
     await user.update(req.body);
 
-    return res.status(200).json({ email });
+    return res.status(200).json();
   }
 }
 

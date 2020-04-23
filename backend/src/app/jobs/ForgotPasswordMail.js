@@ -6,7 +6,7 @@ class ForgotPasswordMail {
   }
 
   async handle({ data }) {
-    const { user, email, token } = data;
+    const { user, email, tokenTemp } = data;
 
     await Mail.sendMail({
       to: `${user.name} <${email}>`,
@@ -14,7 +14,7 @@ class ForgotPasswordMail {
       template: 'forgotPassword',
       context: {
         user: user.name,
-        token,
+        tokenTemp,
         email,
       },
     });
