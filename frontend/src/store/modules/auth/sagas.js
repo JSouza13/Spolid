@@ -81,18 +81,53 @@ export function* Forgot({ payload }) {
     });
 
     Swal.fire({
-      title: `E-mail de recuperação enviado!`,
+      title: `Quase lá, dê uma checada em seu e-mail`,
       icon: 'success',
       confirmButtonColor: themes.color.primary,
       confirmButtonText: 'Ok!',
     }).then(async (result) => {
       if (result.value) {
-        // history.push('/');
+        history.push('/');
       }
     });
   } catch (err) {
     Swal.fire({
       title: `Ocorreu um erro no envio.`,
+      text: err.response.data.error,
+      icon: 'error',
+      confirmButtonColor: themes.color.primary,
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        put(signFailure());
+      }
+    });
+  }
+}
+
+export function* Reset({ payload }) {
+  try {
+    const { tokenTemp, password, confirmPassword } = payload;
+
+    yield call(api.post, 'reset_password', {
+      tokenTemp,
+      password,
+      confirmPassword,
+    });
+
+    Swal.fire({
+      title: `Senha alterada com sucesso!`,
+      icon: 'success',
+      confirmButtonColor: themes.color.primary,
+      confirmButtonText: 'Ok!',
+    }).then(async (result) => {
+      if (result.value) {
+        history.push('/');
+      }
+    });
+  } catch (err) {
+    Swal.fire({
+      title: `Ocorreu um erro na alteração`,
       text: err.response.data.error,
       icon: 'error',
       confirmButtonColor: themes.color.primary,
@@ -123,6 +158,7 @@ export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
-  takeLatest('@auth/SIGN_OUT', signOut),
   takeLatest('@auth/FORGOT_REQUEST', Forgot),
+  takeLatest('@auth/RESET_REQUEST', Reset),
+  takeLatest('@auth/SIGN_OUT', signOut),
 ]);

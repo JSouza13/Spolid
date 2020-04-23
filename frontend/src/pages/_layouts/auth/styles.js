@@ -175,8 +175,11 @@ export const Content = styled.div`
       width: 100%;
       height: 44px;
       color: #333;
-      border: 1px solid #dcdce6;
-      border-radius: 8px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: ${darken(0.03, `${themes.color.secudary}`)};
+      border-image: initial;
+      border-radius: 5px;
       padding: 0 15px;
       margin: 10px 0 10px;
 
@@ -200,8 +203,7 @@ export const Content = styled.div`
       height: 60px;
       width: 100%;
       background: ${themes.color.primary};
-      border: 0;
-      border-radius: 8px;
+      border-radius: 5px;
       color: #fff;
       font-weight: 700;
       display: inline-block;

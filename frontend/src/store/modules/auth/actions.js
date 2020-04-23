@@ -26,6 +26,13 @@ export function forgotRequest(email) {
   };
 }
 
+export function resetRequest(tokenTemp, password, confirmPassword) {
+  return {
+    type: '@auth/RESET_REQUEST',
+    payload: { tokenTemp, password, confirmPassword },
+  };
+}
+
 export function signFailure() {
   return {
     type: '@auth/SIGN_FAILURE',

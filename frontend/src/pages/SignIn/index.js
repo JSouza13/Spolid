@@ -36,8 +36,19 @@ export default function SignIn() {
 
           <Input name="email" type="email" placeholder="Seu e-mail" />
           <Input name="password" type="password" placeholder="Sua senha" />
+          <Link
+            to="/forgot"
+            style={{
+              marginTop: '5px',
+              fontSize: '12px',
+              fontWeight: 600,
+              color: `${themes.color.primary}`,
+            }}
+          >
+            Esqueci minha senha
+          </Link>
 
-          <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
+          <button type="submit">{loading ? 'Carregando...' : 'Entrar'}</button>
           <Link to="/register">
             <FiLogIn size={16} color={themes.color.primary} />
             Criar conta gratuita

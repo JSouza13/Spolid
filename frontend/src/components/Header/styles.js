@@ -6,6 +6,9 @@ export const Container = styled.div`
   background: #fff;
   padding: 0 25px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
   @media (max-width: 650px) {
     padding: 0 15px;
@@ -49,7 +52,7 @@ export const OptionProfileList = styled.div`
   position: absolute;
   width: 100px;
   left: calc(100% - 105px);
-  top: calc(5% + 35px);
+  top: calc(100% + 10px);
   background: rgba(0, 0, 0, 0.8);
   border-radius: 4px;
   padding: 15px 5px;
@@ -106,6 +109,9 @@ export const Content = styled.div`
     strong {
       margin-top: 14px;
     }
+    @media (max-width: 650px) {
+      margin-left: 30px;
+    }
   }
 `;
 
@@ -123,8 +129,13 @@ export const Profile = styled.div`
     margin-right: 10px;
 
     strong {
+      margin-left: 10px;
       display: block;
       color: #333;
+    }
+
+    @media (max-width: 650px) {
+      margin-left: 0px;
     }
   }
 
