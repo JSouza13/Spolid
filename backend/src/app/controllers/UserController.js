@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 import Queue from '../../lib/Queue';
 import ForgotPasswordMail from '../jobs/ForgotPasswordMail';
+import WelcomeMail from '../jobs/WelcomeMail';
 import File from '../models/File';
 import User from '../models/User';
 
@@ -28,6 +29,8 @@ class UserController {
     }
 
     const { id, name, email, provider } = await User.create(req.body);
+
+    await Queue.add(WelcomeMail.key, { name, email });
 
     return res.json({
       id,
