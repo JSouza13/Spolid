@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/server.js",
-    "queue": "nodemon src/queue.js",
-    "eslint": "eslint --fix src --ext .js"
+    "dev": "nodemon src/server.js",
+    "dev-queue": "nodemon src/queue.js",
+    "eslint": "eslint --fix src --ext .js",
+    "start": "node src/server.js",
+    "queue": "node src/queue.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
